@@ -18,6 +18,11 @@ class Usuario extends Model
         "endereco_id",
     ];
 
+    protected $hidden = [
+        "created_at",
+        "updated_at",
+    ];
+
     public function endereco()
     {
         return $this->hasOne(Endereco::class);

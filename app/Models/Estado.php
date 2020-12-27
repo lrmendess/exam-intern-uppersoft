@@ -14,4 +14,10 @@ class Estado extends Model
         "nome",
         "sigla",
     ];
+
+
+    public function enderecos()
+    {
+        return $this->hasMany(Endereco::class, "sigla", "uf");
+    }
 }
