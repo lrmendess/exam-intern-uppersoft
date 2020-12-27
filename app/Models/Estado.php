@@ -10,6 +10,7 @@ class Estado extends Model
     use HasFactory;
 
     protected $fillable = [
+        "codigo_ibge",
         "nome",
         "sigla",
     ];
