@@ -12,7 +12,7 @@ class Usuario extends Model
     protected $fillable = [
         "nome",
         "cpf",
-        "dataNascimento",
+        "data_nascimento",
         "email",
         "telefone",
         "endereco_id",
@@ -20,6 +20,6 @@ class Usuario extends Model
 
     public function endereco()
     {
-        return $this->belongsTo(Endereco::class);
+        return $this->hasOne(Endereco::class);
     }
 }

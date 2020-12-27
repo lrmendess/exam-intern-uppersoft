@@ -15,15 +15,12 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
-            $table->string("nome", 128);
+            $table->string("nome");
             $table->char("cpf", 11)->unique();
-            $table->dateTime("dataNascimento");
+            $table->dateTime("data_nascimento");
             $table->string("email")->unique();
             $table->string("telefone", 15);
-            $table->unsignedBigInteger("endereco_id");
             $table->timestamps();
-
-            $table->foreign("endereco_id")->references("id")->on("enderecos")->onDelete("cascade");
         });
     }
 
