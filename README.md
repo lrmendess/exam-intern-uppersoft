@@ -28,7 +28,15 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 </p>
 
 <p>
-    <b>Obs:</b> As definições criadas por padrão pelo Laravel, referentes ao middleware de autenticação e filas de tarefas agendadas, foram mantidas para evitar eventuais problemas de dependência, podendo ser completamente ignoradas.
+    <b>Obs:</b> As definições criadas por padrão pelo Laravel, referentes ao <i>middleware</i> de autenticação e filas de tarefas agendadas, foram mantidas para evitar eventuais problemas de dependência, podendo ser completamente ignoradas.
+</p>
+
+<p>
+    <b>Obs:</b> Por tratar-se de um projeto relativamente pequeno e sem <i>features</i> de grande relevância, foi descartado o formato de versionamento <b>Git Flow</b>, mas é sabido que este é indispensável em projetos maiores.
+</p>
+
+<p>
+    <b>Obs:</b> No código, os nomes referentes ao domínio do problema foram mantidos no idioma padrão (Português), mas todo o restante do código foi feito em inglês.
 </p>
 
 ### Diagrama de classes
