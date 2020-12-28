@@ -51,6 +51,7 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 - Astah UML 8.2.0
 
 ## Bibliotecas extras
+- [`laravel/installer`](https://github.com/laravel/installer)
 - [`validator-docs`](https://github.com/geekcom/validator-docs)
 - [`Laravel-lang`](https://github.com/Laravel-Lang/lang)
 
@@ -91,7 +92,7 @@ php artisan serve
 ```
 
 ## Endpoints
-|Verbo|URI|Action|
+|Verb|URI|Action|
 |-----|---|------|
 |GET|`https://<HOST>/usuarios`|UsuariosController@index|
 |GET|`https://<HOST>/usuarios/{id}`|UsuariosController@show|
