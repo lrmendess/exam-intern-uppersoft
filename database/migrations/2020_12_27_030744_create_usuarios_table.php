@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->char("cpf", 11)->unique();
             $table->dateTime("data_nascimento");
             $table->string("email")->unique();
-            $table->string("telefone", 15);
+            $table->string("telefone", 20);
             
             $table->timestamps();
         });

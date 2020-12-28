@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Endereco;
 use App\Models\Usuario;
-use App\Rules\TelefoneValidationRule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
-class UsuarioController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,7 +41,7 @@ class UsuarioController extends Controller
             // The transaction prevents a user from being created without an address or vice versa.
             // Maintaining the integrity of the database.
             DB::beginTransaction();
-                $usuarioInput = Usuario::sanitize($request->except("endereco"));
+                $usuarioInput = $request->except("endereco");
                 $usuario = Usuario::create($usuarioInput);
                 
                 $enderecoInput = array_merge($request->endereco, ["id" => $usuario->id]);
@@ -104,7 +103,7 @@ class UsuarioController extends Controller
         {
             $usuario = Usuario::with("endereco")->findOrFail($id);
             
-            $usuarioInput = Usuario::sanitize($request->except("endereco"));
+            $usuarioInput = $request->except("endereco");
             
             $usuario->update($usuarioInput);
             $usuario->endereco()->update($request->endereco);
