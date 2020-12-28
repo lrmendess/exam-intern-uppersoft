@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "6a565f3d-b56a-48cf-9cd2-012c6948f287",
+		"name": "Uppersoft Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Adicionar usuário 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Alexandre Luiz Silva\",\r\n    \"cpf\": \"11732965307\",\r\n    \"data_nascimento\": \"04/06/1968\",\r\n    \"email\": \"aalexandreluizsilva@hotmail.com.br\",\r\n    \"telefone\": \"+5586994867889\",\r\n    \"endereco\": {\r\n        \"complemento\": \"\",\r\n        \"numero\": 187,\r\n        \"logradouro\": \"Rua Ludimar Carvalho\",\r\n        \"bairro\": \"Angelim\",\r\n        \"cidade\": \"Teresina\",\r\n        \"uf\": \"PI\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar usuário 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Lorena Silvana Mendes\",\r\n    \"cpf\": \"843.645.568-15\",\r\n    \"data_nascimento\": \"24/07/1942\",\r\n    \"email\": \"lorenasilvanamendes-79@engineer.com\",\r\n    \"telefone\": \"(62) 2674-9404\",\r\n    \"endereco\": {\r\n        \"complemento\": \"Próximo ao Bar do Dinai\",\r\n        \"numero\": 76,\r\n        \"logradouro\": \"Rua Genoveva Martins\",\r\n        \"bairro\": \"Vila Santa Maria de Nazareth\",\r\n        \"cidade\": \"Anápolis\",\r\n        \"uf\": \"GO\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar usuário 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Nina Pietra Isabel Galvão\",\r\n    \"cpf\": \"215.570.740-11\",\r\n    \"data_nascimento\": \"03/12/1992\",\r\n    \"email\": \"ninapietraisabelgalvao__ninapietraisabelgalvao@gigaonline.com.br\",\r\n    \"telefone\": \"6699247-2179\",\r\n    \"endereco\": {\r\n        \"complemento\": \"QD17, LT10\",\r\n        \"numero\": 167,\r\n        \"logradouro\": \"Rua Elisa Bortoloso Luciano\",\r\n        \"bairro\": \"Residencial Vitória Régia\",\r\n        \"cidade\": \"Sinop\",\r\n        \"uf\": \"MT\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter usuário 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir usuário 2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar usuário 1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Alexandre Luiz Silva\",\r\n    \"cpf\": \"11732965307\",\r\n    \"data_nascimento\": \"04/06/1968\",\r\n    \"email\": \"aalexandreluizsilva@hotmail.com.br\",\r\n    \"telefone\": \"5586994867889\",\r\n    \"endereco\": {\r\n        \"complemento\": \"Ao lado da MLC - Material de Construção\",\r\n        \"numero\": 203,\r\n        \"logradouro\": \"Rua Alfredo Mota\",\r\n        \"bairro\": \"Taquara\",\r\n        \"cidade\": \"Baixo Guandu\",\r\n        \"uf\": \"ES\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar usuários",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
