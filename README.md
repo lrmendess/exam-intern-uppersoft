@@ -24,14 +24,18 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 - Tratamento de erros.
 
 <p>
-    Como tentativa de atingir tais critérios e demonstrar conhecimento na área, algumas decisões de projeto foram tomadas, como a criação de diferentes entidades relacionadas entre si (Usuario, Endereco e Estado) ao invés de uma simples classe/tabela contendo todas as informações requisitadas, assim aumentando a complexidade da solução, mas também a qualidade e integridade da mesma.
+    Como tentativa de atingir tais critérios e demonstrar conhecimento na área, algumas decisões de projeto foram tomadas, como por exemplo a criação de diferentes entidades relacionadas entre si (Usuario, Endereco e Estado) ao invés de uma simples classe/tabela contendo todas as informações requisitadas, assim aumentando a complexidade da solução, mas também a qualidade e integridade da mesma.
+</p>
+
+<p>
+    <b>Obs:</b> As definições criadas por padrão pelo Laravel, referentes ao middleware de autenticação e filas de tarefas agendadas, foram mantidas para evitar eventuais problemas de dependência, podendo ser completamente ignoradas.
 </p>
 
 ### Diagrama de classes
 ![Class Diagram Image](https://github.com/lrmendess/uppersoft_challenge/blob/master/docs/ClassDiagram.png?raw=true)
 
 ### Diagrama ER
-![ER Diagram Image](https://github.com/lrmendess/uppersoft_challenge/blob/master/docs/ERDiagram.png)
+![ER Diagram Image](https://github.com/lrmendess/uppersoft_challenge/blob/master/docs/ERDiagram.png?raw=true)
 
 ## Especificação da máquina de testes
 - OS: Windows 10 Professional (build 19041);
@@ -110,7 +114,7 @@ Amostra de https://www.4devs.com.br/gerador_de_pessoas
     "id": 2,
     "nome": "Lorena Silvana Mendes",
     "cpf": "84364556815",
-    "data_nascimento": "1942-07-24",
+    "data_nascimento": "24/07/1942",
     "email": "lorenasilvanamendes-79@engineer.com",
     "telefone": "6226749404",
     "endereco": {
@@ -130,7 +134,7 @@ Não há necessidade de especificar os `id`'s no corpo da mensagem, mas sendo o 
 
 Os campos `cpf` e `telefone` funcionam com e sem pontuação, sendo armazenados apenas seus dígitos, ou seja, armazenados sem máscara.
 
-Como decisão de projeto, o campo `data_nascimento` deve obrigatoriamente estar no padrão universal `Y-m-d`.
+Como decisão de projeto, o campo `data_nascimento` deve obrigatoriamente estar no padrão nacional `d/m/Y`.
 
 O campo `endereco.uf` deve conter apenas a sigla de um **Estado** válido e cadastrado no banco de dados, caso contrário, não passará pela etapa de validação de integridade.
 
@@ -139,7 +143,7 @@ Amostra de https://www.4devs.com.br/gerador_de_pessoas
 {
     "nome": "Alexandre Luiz Silva",
     "cpf": "117.329.653-07",
-    "data_nascimento": "1968-06-04",
+    "data_nascimento": "04/06/1968",
     "email": "aalexandreluizsilva@hotmail.com.br",
     "telefone": "(86) 99486-7889",
     "endereco": {
