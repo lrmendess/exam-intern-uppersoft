@@ -41,11 +41,12 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 
 ## Tecnologias utilizadas
 - PHP 7.4.13
-- Laravel Framework 8.20.1
+- Laravel 8.20.1
 - MySQL 5.7.24
 - Apache 2.4.35
 - Laragon 4.0.16
 - Visual Studio Code
+- Postman 7.36.1
 - MySQL Workbench 8.0 CE
 - Astah UML 8.2.0
 
@@ -54,6 +55,17 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 - [`Laravel-lang`]([https://github.com/Laravel-Lang/lang])
 
 ## Deploy
+Instalar as dependências do projeto:
+```bash
+composer install
+```
+
+Gerar um `.env` válido:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
 Configurar o arquivo `.env` para atender as configurações do banco de dados.
 ```yml
 DB_CONNECTION=mysql
@@ -78,7 +90,7 @@ Executar o servidor:
 php artisan serve
 ```
 
-## Utilização da API
+## Endpoints
 |Verbo|URI|Action|
 |-----|---|------|
 |GET|`https://<HOST>/usuarios`|UsuariosController@index|
@@ -89,7 +101,9 @@ php artisan serve
 <br>
 
 ## Formato do corpo de respostas
-### Amostra de https://www.4devs.com.br/gerador_de_pessoas
+Os campos `id` de **Usuario** e **Endereco** (devem) são sempre iguais devido ao relacionamento 1:1 existente entre suas chaves primárias.
+
+Amostra de https://www.4devs.com.br/gerador_de_pessoas
 ```json
 {
     "id": 2,
@@ -111,7 +125,15 @@ php artisan serve
 ```
 
 ## Formato do corpo de requisições
-### Não há necessidade de especificar os `id`'s no corpo da mensagem, mas sendo o caso, estes serão inclusos no processo de validação para evitar problemas de integridade no banco de dados.
+Não há necessidade de especificar os `id`'s no corpo da mensagem, mas sendo o caso, estes serão inclusos no processo de validação para evitar problemas de integridade no banco de dados.
+
+Os campos `cpf` e `telefone` funcionam com e sem pontuação, sendo armazenados apenas seus dígitos, ou seja, armazenados sem máscara.
+
+Como decisão de projeto, o campo `data_nascimento` deve obrigatoriamente estar no padrão universal `Y-m-d`.
+
+O campo `endereco.uf` deve conter apenas a sigla de um **Estado** válido e cadastrado no banco de dados, caso contrário, não passará pela etapa de validação de integridade.
+
+Amostra de https://www.4devs.com.br/gerador_de_pessoas
 ```json
 {
     "nome": "Alexandre Luiz Silva",
