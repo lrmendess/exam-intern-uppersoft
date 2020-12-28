@@ -28,10 +28,10 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 </p>
 
 ### Diagrama de classes
-![Dummy](https://link)
+![Class Diagram Image](https://github.com/lrmendess/uppersoft_challenge/blob/master/docs/ClassDiagram.png?raw=true)
 
 ### Diagrama ER
-![Dummy](https://link)
+![ER Diagram Image](https://github.com/lrmendess/uppersoft_challenge/blob/master/docs/ERDiagram.png)
 
 ## Especificação da máquina de testes
 - OS: Windows 10 Professional (build 19041);
