@@ -51,8 +51,8 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 - Astah UML 8.2.0
 
 ## Bibliotecas extras
-- [`validator-docs`]([https://link](https://github.com/geekcom/validator-docs))
-- [`Laravel-lang`]([https://github.com/Laravel-Lang/lang])
+- [`validator-docs`](https://github.com/geekcom/validator-docs)
+- [`Laravel-lang`](https://github.com/Laravel-Lang/lang)
 
 ## Deploy
 Instalar as dependências do projeto:
