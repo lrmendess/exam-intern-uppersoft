@@ -10,18 +10,16 @@ class Endereco extends Model
     use HasFactory;
 
     protected $fillable = [
+        "id", // PK && Usuario_FK
         "uf",
         "cidade",
         "bairro",
         "logradouro",
         "numero",
         "complemento",
-        "usuario_id",
     ];
-
+    
     protected $hidden = [
-        "id",
-        "usuario_id",
         "created_at",
         "updated_at",
     ];
@@ -29,10 +27,5 @@ class Endereco extends Model
     public function estado()
     {
         return $this->belongsTo(Estado::class, "uf", "sigla");
-    }
-
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class);
     }
 }

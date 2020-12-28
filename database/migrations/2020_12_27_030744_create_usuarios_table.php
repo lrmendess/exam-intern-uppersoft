@@ -15,11 +15,13 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
+
             $table->string("nome");
             $table->char("cpf", 11)->unique();
             $table->dateTime("data_nascimento");
             $table->string("email")->unique();
             $table->string("telefone", 15);
+            
             $table->timestamps();
         });
     }

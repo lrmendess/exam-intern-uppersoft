@@ -10,14 +10,8 @@ class Estado extends Model
     use HasFactory;
 
     protected $fillable = [
-        "codigo_ibge",
+        "id", // IBGE Code
         "nome",
         "sigla",
     ];
-
-
-    public function enderecos()
-    {
-        return $this->hasMany(Endereco::class, "sigla", "uf");
-    }
 }

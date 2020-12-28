@@ -13,10 +13,10 @@ class CreateEstadosTable extends Migration
      */
     public function up()
     {
-        // id := codigo_ibge
         Schema::create('estados', function (Blueprint $table) {
-            $table->primary("codigo_ibge");
-            $table->unsignedTinyInteger("codigo_ibge");
+            $table->primary("id");
+            $table->unsignedTinyInteger("id");
+            
             $table->string("nome", 31)->unique();
             $table->char("sigla", 2)->unique();
         });

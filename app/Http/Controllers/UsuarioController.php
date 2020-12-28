@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use App\Rules\TelefoneValidationRule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
@@ -18,7 +19,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return Usuario::with(["endereco"])->get();
+        return Usuario::with("endereco")->get();
     }
 
     /**
@@ -29,7 +30,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validateUsuario($request->all());
+        $validator = Usuario::validate($request->all());
 
         if ($validator->fails())
         {
@@ -38,13 +39,17 @@ class UsuarioController extends Controller
 
         try
         {
-            $usuarioData = $this->sanitizeUsuario($request->except("endereco"));
-            $usuario = Usuario::create($usuarioData);
-            
-            $enderecoData = array_merge($request->endereco, ["usuario_id" => $usuario->id]);
-            $endereco = Endereco::create($enderecoData);
+            // The transaction prevents a user from being created without an address or vice versa.
+            // Maintaining the integrity of the database.
+            DB::beginTransaction();
+                $usuarioInput = Usuario::sanitize($request->except("endereco"));
+                $usuario = Usuario::create($usuarioInput);
+                
+                $enderecoInput = array_merge($request->endereco, ["id" => $usuario->id]);
+                Endereco::create($enderecoInput);
+            DB::commit();
 
-            return $usuario->refresh();
+            return $usuario->load("endereco");
         }
         catch (\Exception $e)
         {
@@ -62,7 +67,7 @@ class UsuarioController extends Controller
     {
         try
         {
-            return Usuario::with(["endereco"])->findOrFail($id);
+            return Usuario::with("endereco")->findOrFail($id);
         }
         catch (\Exception $e)
         {
@@ -79,17 +84,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        /**
-         * Checks if the (news?) cpf and email already exist.
-         * Checks whether the user is the true owner of the address (if specified).
-         */
-        $overrideValidations = [
-            "cpf"                 => ["required", "min:11", "max:14", "cpf", "unique:usuarios,cpf,{$id}"],
-            "email"               => ["required", "max:255", "email", "unique:usuarios,email,{$id}"],
-            "endereco.usuario_id" => ["exists:usuarios,id", Rule::in([$id])]
+        // Checks the integrity of the 1:1 relationship between Usuario and Endereco.
+        // Also checks the integrity of unique fields.
+        $customRules = [
+            "id"          => ["exists:usuarios,id", Rule::in([$id])], // if specified
+            "cpf"         => ["required", "min:11", "max:14", "cpf", "unique:usuarios,cpf,{$id}"],
+            "email"       => ["required", "max:255", "email", "unique:usuarios,email,{$id}"],
+            "endereco.id" => ["exists:usuarios,id", Rule::in([$id])], // if specified
         ];
 
-        $validator = $this->validateUsuario($request->all(), $overrideValidations);
+        $validator = Usuario::validate($request->all(), $customRules);
 
         if ($validator->fails())
         {
@@ -98,21 +102,12 @@ class UsuarioController extends Controller
 
         try
         {
-            $usuario = Usuario::with(["endereco"])->findOrFail($id);
-
-            $usuarioData = $this->sanitizeUsuario($request->except("endereco"));
-            $usuario->update($usuarioData);
-
-            // An unexpected case where the user does not have an address.
-            if (!$usuario->endereco()->exists())
-            {
-                $enderecoData = array_merge($request->endereco, ["usuario_id" => $usuario->id]);
-                $endereco = Endereco::create($enderecoData);
-            }
-            else
-            {
-                $usuario->endereco()->update($request->endereco);
-            }
+            $usuario = Usuario::with("endereco")->findOrFail($id);
+            
+            $usuarioInput = Usuario::sanitize($request->except("endereco"));
+            
+            $usuario->update($usuarioInput);
+            $usuario->endereco()->update($request->endereco);
 
             return $usuario->refresh();
         }
@@ -132,6 +127,7 @@ class UsuarioController extends Controller
     {
         try
         {
+            // The address is also deleted because of the cascading deletion.
             Usuario::findOrFail($id)->delete();
 
             return response()->noContent();
@@ -140,52 +136,5 @@ class UsuarioController extends Controller
         {
             return response()->json(["message" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
-    }
-
-    /**
-     * Validate Usuario properties.
-     * 
-     * @param array $properties
-     * @param array $overrideValidations
-     * 
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    private function validateUsuario($properties, $overrideValidations = [])
-    {
-        $properties = $this->sanitizeUsuario($properties);
-
-        $validations = [
-            "nome"            => ["required", "max:255", "string"],
-            "cpf"             => ["required", "min:11", "max:14", "cpf", "unique:usuarios,cpf"],
-            "data_nascimento" => ["required", "date", "date_format:Y-m-d"],
-            "email"           => ["required", "max:255", "email", "unique:usuarios,email"],
-            "telefone"        => ["required", "min:8", "max:20", "string", new TelefoneValidationRule],
-            "endereco"        => ["required"],
-                "endereco.uf"          => ["required", "min:2", "max:2", "string", "exists:estados,sigla"],
-                "endereco.cidade"      => ["required", "max:255", "string"],
-                "endereco.bairro"      => ["required", "max:255", "string"],
-                "endereco.logradouro"  => ["required", "max:255", "string"],
-                "endereco.numero"      => ["required", "integer"],
-                "endereco.complemento" => ["nullable", "max:255", "string"],
-        ];
-        
-        $validations = array_merge($validations, $overrideValidations);
-
-        return validator()->make($properties, $validations);
-    }
-
-    /**
-     * Sanitize Usuario properties.
-     * 
-     * @param array $properties
-     * 
-     * @return array (Usuario)
-     */
-    private function sanitizeUsuario($properties)
-    {
-        $properties["cpf"]      = preg_replace('/[^0-9]/', '', $properties["cpf"]);
-        $properties["telefone"] = preg_replace('/[^0-9]/', '', $properties["telefone"]);
-
-        return $properties;
     }
 }

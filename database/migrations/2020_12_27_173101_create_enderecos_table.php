@@ -14,18 +14,19 @@ class CreateEnderecosTable extends Migration
     public function up()
     {
         Schema::create('enderecos', function (Blueprint $table) {
-            $table->id();
+            $table->primary("id"); // PK && Usuario_FK
+            $table->unsignedBigInteger("id");
+            
             $table->string("complemento")->nullable();
             $table->integer("numero");
             $table->string("logradouro");
             $table->string("bairro");
             $table->string("cidade");
             $table->char("uf", 2);
-            $table->unsignedBigInteger("usuario_id")->unique();
             $table->timestamps();
 
             $table->foreign("uf")->references("sigla")->on("estados");
-            $table->foreign("usuario_id")->references("id")->on("usuarios")->onDelete("cascade");
+            $table->foreign("id")->references("id")->on("usuarios")->onDelete("cascade");
         });
     }
 
