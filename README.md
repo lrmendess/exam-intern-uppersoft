@@ -103,7 +103,6 @@ php artisan serve
 |POST|`https://<HOST>/usuarios`|UsuariosController@store|
 |PUT|`https://<HOST>/usuarios/{id}`|UsuariosController@update|
 |DELETE|`https://<HOST>/usuarios/{id}`|UsuariosController@delete|
-<br>
 
 ## Formato do corpo de respostas
 Os campos `id` de **Usuario** e **Endereco** (devem) são sempre iguais devido ao relacionamento 1:1 existente entre suas chaves primárias.
@@ -156,3 +155,6 @@ Amostra de https://www.4devs.com.br/gerador_de_pessoas
     }
 }
 ```
+
+## Testes
+No diretório `~/docs/` existe um arquivo chamado `uppersoft_challenge.postman_collection.json`, que pode ser importado e utilizado no Postman para testar os endpoints. Este contém alguns exemplos para utilização de todos os endpoints da API.
