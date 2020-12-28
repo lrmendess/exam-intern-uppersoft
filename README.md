@@ -45,6 +45,7 @@ Desafio de ingressão para vaga de estágio na UpperSoft.
 
 ## Tecnologias utilizadas
 - PHP 7.4.13
+- Composer 2.0.8
 - Laravel 8.20.1
 - MySQL 5.7.24
 - Apache 2.4.35
@@ -80,7 +81,7 @@ DB_DATABASE=uppersoft_challenge
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-Criar um *schema* de nome <DB_DATABASE> num banco de dados com engine MySQL:
+Criar um *schema* de nome <DB_DATABASE> (caso não exista) num banco de dados com engine MySQL:
 ```
 create database <DB_DATABASE>;
 ```
